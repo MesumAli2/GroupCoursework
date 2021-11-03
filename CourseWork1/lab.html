@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #subject{
+        margin-left: 250px;
+        margin-top: -200px;
+    }
+    table, th, td {
+          border: 1px solid black;
+        }
+        th, td {
+  padding: 15px;}
+
+  button{
+     width: 100px;
+     height: 30px;
+     margin-left: 60px;
+  }
+
+        </style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<div id="app">
+    <h1>After School Club</h1>
+    <!--Displays the image from data Vue Object -->
+    <h1 v-html="subject.image">{{subject.image}}</h1>
+     <!--Use V-on: click to call addtocart -->
+    <button v-on:click="addtocart" v-if="canAddToCart"> Add to cart</button>
+    <button disabled='disabled'v-else> Add to cart</button>
+
+    <div id="subject">
+    <table> 
+    <tr>
+    <th>Subject</th>    
+    <th>Location</th>
+    <th>Price</th>
+    <th>Spaces</th>
+    </tr>
+
+    <tr> 
+    <th>{{subject.lesson}}</th>    
+    <th>{{subject.location}} </th>
+    <th> {{subject.price}}</th>
+    <th> {{subject.Spaces}}</th> 
+    </tr>
+    </table>
+    </div>
+  
+</div>
+
+<script>
+
+    let app = new Vue({
+        el:'#app',
+        data:{
+            subject:{
+            lesson: "Maths",
+            location: "London",
+            price: 100,
+            image:'<img src="mathsicon.png" alt="Stickman" width="230" height="200">',
+            Spaces: 5
+        }},
+        methods:{
+            addtocart :function(){
+            if(this.subject.Spaces > 0){
+            this.subject.Spaces -- }
+        } },
+        computed:{
+            //Diables add to cart button if item count reaches 0
+            canAddToCart : function(){
+            return this.subject.Spaces !== 0 }
+        }
+                     })
+</script>
+</html>
